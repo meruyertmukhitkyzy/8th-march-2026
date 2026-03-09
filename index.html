@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #99C24D;
+            background-image:
+            repeating-linear-gradient(
+                to right, transparent 0 100px,
+                #3A4F41 100px 101px
+            ),
+            repeating-linear-gradient(
+                to bottom, transparent 0 100px,
+                #3A4F41 100px 101px
+            );
+        }
+        
+        body::before{
+            position: absolute;
+            width: min(1400px, 100vw);
+            top: 10%;
+            left: 50%;
+            height: 90%;
+            transform: translateX(-50%);
+            content: '';
+            background-image: url(images/bg.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: top center;
+            pointer-events: none;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="banner">
+    <div class="slider" style="--quantity: 10">
+        <div class="item" style="--position: 1"
+            data-card="The Fool"
+             data-image="feminist/fool.png">
+            <img src="feminist/fool.png" alt="The Fool card">
+        </div>
+
+        <div class="item" style="--position: 2"
+            data-card="The Magician"
+             data-image="feminist/magician.png">
+            <img src="feminist/magician.png" alt="The Magician card">
+        </div>
+
+        <div class="item" style="--position: 3"
+            data-card="The Hanged One"
+             data-image="feminist/hanged_one.png">
+            <img src="feminist/hanged_one.png" alt="The High Priestess card">
+        </div>
+
+        <div class="item" style="--position: 4"
+            data-card="The Hermit"
+             data-image="feminist/hermit.png">
+            <img src="feminist/hermit.png" alt="The Empress card">
+        </div>
+
+        <div class="item" style="--position: 5"
+            data-card="The Emperor"
+             data-image="feminist/emperor.png">
+            <img src="feminist/emperor.png" alt="The Emperor card">
+        </div>
+
+        <div class="item" style="--position: 6"
+            data-card="Three Of Cups"
+             data-image="feminist/three_of_cups.png">
+            <img src="feminist/three_of_cups.png" alt="The Hierophant card">
+        </div>
+
+        <div class="item" style="--position: 7"
+            data-card="Strength"
+             data-image="feminist/strength.png">
+            <img src="feminist/strength.png" alt="Strength card">
+        </div>
+
+        <div class="item" style="--position: 8"
+            data-card="The Devil"
+             data-image="feminist/devil.png">
+            <img src="feminist/devil.png" alt="The Devil card">
+        </div>
+
+        <div class="item" style="--position: 9"
+            data-card="Death"
+             data-image="feminist/death.png">
+            <img src="feminist/death.png" alt="Death card">
+        </div>
+
+        <div class="item" style="--position: 10"
+            data-card="Sun"
+             data-image="feminist/sun.png">
+            <img src="feminist/sun.png" alt="Sun card">
+        </div>
+    </div>
+
+    <div class="happy">
+        <h1>Happy</h1>
+        <div class="feminism"></div>
+    </div>
+
+    <div class="content">
+        <h2 data-content="8th of March">
+            8th of March
+        </h2>
+        <div class="author">
+            <h3>Tarot Reading</h3>
+            <h4>Feminist Edition</h4>
+            <h5>Pick your Card!</h5>
+        </div>
+        <div class="model"></div>
+    </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="predictionPopup" aria-hidden="true">
+    <div class="popup__overlay"></div>
+    <div class="popup__card" role="dialog" aria-modal="true" aria-labelledby="popupCardTitle">
+        <button class="popup__close" type="button" aria-label="Close popup">&times;</button>
+        <div class="popup__content">
+            <div class="popup__image-wrap">
+                <img id="popupImage" src="" alt="">
+            </div>
+            <div class="popup__text">
+                <h3 id="popupCardTitle"></h3>
+                <h4 id="popupPoemTitle"></h4>
+                <p id="popupDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+    
+</body>
+</html>
