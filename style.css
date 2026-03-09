@@ -1,0 +1,463 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+@import url('https://fonts.cdnfonts.com/css/raqillas');
+
+/* Banner */
+.banner{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Slider */
+.banner .slider{
+    position: absolute;
+    width: clamp(80px, 8vw, 200px);
+    aspect-ratio: 200 / 343;
+    top: 10%;
+    left: calc(55% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.9s ease;
+    will-change: transform;
+}
+
+.banner .slider.is-stopped{
+    animation: none;
+}
+
+@keyframes autoRun{
+    from{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item{
+    position: absolute;
+    inset: 0;
+    transform:
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(clamp(180px, 30vw, 350px));
+    cursor: pointer;
+    transition: transform 0.5s ease, filter 0.35s ease, opacity 0.35s ease;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+}
+
+.banner .slider .item img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.22);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.banner .slider .item:hover img{
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.28);
+}
+
+.banner .slider.has-selection .item{
+    opacity: 0.72;
+    filter: brightness(0.85);
+}
+
+.banner .slider.has-selection .item.active{
+    opacity: 1;
+    filter: none;
+    z-index: 5;
+}
+
+.banner .slider.has-selection .item.active img{
+    transform: translateY(-10px) scale(1.08);
+    box-shadow: 0 24px 45px rgba(0,0,0,0.35);
+}
+
+/* Happy section */
+.banner .happy{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, 90vw);
+    height: max-content;
+    padding-bottom: clamp(100px, 18vh, 170px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .happy h1{
+    font-family: 'Raqillas', sans-serif;
+    font-size: clamp(3rem, 6vw, 7rem);
+    line-height: 1em;
+    color: #3A4F41;
+    position: relative;
+    padding-left: 5%;
+}
+
+.banner .happy .feminism{
+    background-image: url(feminist/womanpower.svg);
+    width: clamp(60px, 8vw, 120px);
+    height: clamp(60px, 8vw, 120px);
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 1;
+}
+
+/* Content section */
+.banner .content{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, 90vw);
+    height: max-content;
+    padding-bottom: clamp(30px, 6vh, 100px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h2{
+    font-family: 'ICA Rubrik';
+    font-size: clamp(3.5rem, 8vw, 10rem);
+    line-height: 1em;
+    color: #F18F01;
+    position: relative;
+}
+
+.banner .content h2::after{
+    position: absolute;
+    inset: 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #ffffff;
+    color: transparent;
+}
+
+.banner .content .author{
+    text-align: right;
+    max-width: 500px;
+    line-height: 1.6em;
+}
+
+.banner .content h3{
+    font-family: Poppins, sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    color: #ffffff;
+}
+
+.banner .content h4{
+    font-family: 'Raqillas', sans-serif;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    color: #3A4F41;
+}
+
+.banner .content h5{
+    font-family: Poppins, sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    color: #ffffff;
+}
+
+.banner .content .model{
+    background-image: url(feminist/Meruyert.png);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto clamp(30%, 70%, 80%);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    z-index: 1;
+}
+
+/* Popup */
+.popup{
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 999;
+}
+
+.popup.is-open{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.popup__overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+}
+
+.popup__card{
+    position: relative;
+    z-index: 2;
+    width: min(920px, 92vw);
+    height: min(88vh, 900px);
+    background: #f7f3ea;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    transform: translateY(20px) scale(0.96);
+    transition: transform 0.35s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup.is-open .popup__card{
+    transform: translateY(0) scale(1);
+}
+
+.popup__close{
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #3A4F41;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.popup__content{
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 28px;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.popup__image-wrap{
+    position: sticky;
+    top: 0;
+    align-self: start;
+}
+
+.popup__image-wrap img{
+    width: 100%;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+}
+
+.popup__text{
+    min-width: 0;
+    min-height: 0;
+    padding-right: 10px;
+}
+
+.popup__text h3{
+    font-family: 'ICA Rubrik';
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: #F18F01;
+    margin-bottom: 14px;
+    line-height: 1.1;
+}
+
+.popup__text h4{
+    font-family: Poppins, sans-serif;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.5;
+    color: #3A4F41;
+    margin-bottom: 18px;
+    font-style: italic;
+}
+
+.popup__text p{
+    font-family: Poppins, sans-serif;
+    font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+    line-height: 1.9;
+    color: #3A4F41;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    text-align: left;
+}
+
+body.popup-open{
+    overflow: hidden;
+}
+
+/* Tablet */
+@media screen and (max-width: 1023px){
+    .banner .slider{
+        width: clamp(80px, 8vw, 160px);
+        left: calc(55% - 80px);
+    }
+
+    .banner .slider .item{
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(250px);
+    }
+
+    .banner .happy{
+        justify-content: end;
+        text-align: start;
+        z-index: 2;
+    }
+
+    .banner .happy h1{
+        width: 50%;
+        font-size: 4em;
+        padding-bottom: 100px;
+    }
+
+    .banner .happy .feminism{
+        width: 50%;
+        background-image: none;
+    }
+
+    .banner .content{
+        justify-content: center;
+        text-align: center;
+    }
+
+    .banner .content h2{
+        text-align: center;
+        width: 100%;
+        font-size: 7em;
+    }
+
+    .banner .content .author{
+        color: #fff;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+
+    .banner .content .author h4{
+        color: #F18F01;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px){
+    .banner .slider{
+        width: clamp(80px, 8vw, 100px);
+        left: calc(52% - 50px);
+        top: 20%;
+    }
+
+    .banner .slider .item{
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(180px);
+    }
+    .banner .happy{
+    padding-bottom: 130px;
+    }
+    .banner .happy h1{
+        width: 100%;
+        font-size: 3em;
+        color: #ffffff;
+        padding-bottom: 0px;
+    }
+
+    .banner .happy .feminism{
+        width: 50%;
+        background-image: none;
+    }
+
+    .banner .content h2{
+        font-size: 4em;
+    }
+
+    .banner .content .model{
+    background-image: url(feminist/Meruyert.png);
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    z-index: 1;
+}
+
+    .popup{
+        padding: 12px;
+    }
+
+    .popup__card{
+        width: 100%;
+        max-height: 92vh;
+        border-radius: 18px;
+    }
+
+    .popup__content{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px 16px 16px;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    }
+
+    .popup__image-wrap{
+        position: static;
+        max-width: 180px;
+        margin: 0 auto;
+        flex-shrink: 0;
+    }
+
+    .popup__text{
+    min-width: 0;
+    min-height: 0;
+    padding-right: 4px;
+    }
+
+    .popup__text h3{
+        text-align: center;
+        padding-right: 36px;
+    }
+
+    .popup__text h4{
+        text-align: center;
+    }
+
+    .popup__text p{
+        font-size: 0.98rem;
+        line-height: 1.75;
+    }
+}
